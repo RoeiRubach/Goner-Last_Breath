@@ -12,9 +12,9 @@ public class EnemyLogic : MonoBehaviour
     [Space]
 
     [Header("Audio variables")]
-    private AudioSource audioSource;
     [SerializeField]
     private AudioClip zombieDead;
+    private AudioSource audioSource;
 
     private void Start()
     {
