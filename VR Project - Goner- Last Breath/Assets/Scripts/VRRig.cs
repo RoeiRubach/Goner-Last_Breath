@@ -38,7 +38,8 @@ public class VRRig : MonoBehaviour
     private Transform headConstraint;
     
     private Vector3 headBodyOffSet;
-    private float timeSmoothness;
+    [SerializeField]
+    private float turnSmoothness;
 
 
     void Start()
@@ -49,9 +50,9 @@ public class VRRig : MonoBehaviour
     void LateUpdate()
     {
         transform.position = headConstraint.position + headBodyOffSet;
-        //transform.forward = Vector3.Lerp(transform.forward,
-        //    Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized, Time.deltaTime * timeSmoothness);
-        transform.forward = Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized;
+        transform.forward = Vector3.Lerp(transform.forward,
+            Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized, Time.deltaTime * turnSmoothness);
+        //transform.forward = Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized;
 
         head.Mapping();
         leftHand.Mapping();
