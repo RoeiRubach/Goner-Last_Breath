@@ -6,9 +6,12 @@ public class DestroyOnCollision : MonoBehaviour
 {
     private float counter = 10f;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Update()

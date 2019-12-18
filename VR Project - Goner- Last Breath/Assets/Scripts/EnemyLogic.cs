@@ -37,12 +37,23 @@ public class EnemyLogic : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        isZombieDead = true;
-        gameObject.GetComponent<Collider>().isTrigger = true;
-        audioSource.Stop();
-        audioSource.volume = 0.4f;
-        audioSource.PlayOneShot(zombieDead);
+    }
 
-        Destroy(gameObject, 2.3f);
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+        }
+        if (other.gameObject.CompareTag("Bullet"))
+        {
+            isZombieDead = true;
+            gameObject.GetComponent<Collider>().isTrigger = true;
+            audioSource.Stop();
+            audioSource.volume = 0.4f;
+            audioSource.PlayOneShot(zombieDead);
+
+            Destroy(gameObject, 2.3f);
+        }
     }
 }
