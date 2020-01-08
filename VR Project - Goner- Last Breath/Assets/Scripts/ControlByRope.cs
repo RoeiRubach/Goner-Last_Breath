@@ -8,7 +8,7 @@ public class ControlByRope : MonoBehaviour
     Transform ropeFirstCharJoint;
 
     [SerializeField]
-    Transform ovrCamera;
+    AudioSource monsterScream, maleScream;
 
     [SerializeField]
     float speed;
@@ -16,17 +16,25 @@ public class ControlByRope : MonoBehaviour
     [HideInInspector]
     public bool isLookingAtDummy;
 
+    private bool isRopeBreak, once;
+
     private void FixedUpdate()
     {
-        if (ropeFirstCharJoint.position.y <= 2 && !isLookingAtDummy)
+        if (ropeFirstCharJoint.position.y <= 2 && !isRopeBreak)
         {
-            isLookingAtDummy = true;
-            StartCoroutine(WaitAndSwitchScenes(1));
+            isRopeBreak = true;
+            monsterScream.Play();
         }
-        if (isLookingAtDummy)
+
+        if (isLookingAtDummy && isRopeBreak)
         {
-            ovrCamera.LookAt(transform);
-            transform.position += new Vector3(0, 0, ropeFirstCharJoint.position.y * speed * Time.deltaTime);
+            if (!once)
+            {
+                once = true;
+                maleScream.Play();
+            }
+            StartCoroutine(WaitAndSwitchScenes(1));
+            transform.position += new Vector3(0, 0, speed * Time.deltaTime);
         }
     }
 
