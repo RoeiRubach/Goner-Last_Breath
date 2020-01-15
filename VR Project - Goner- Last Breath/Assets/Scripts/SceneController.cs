@@ -40,7 +40,7 @@ public class SceneController : SingletonDontDestroy<SceneController>
         CanvasInitialization();
         yield return new WaitForSeconds(_transitionWaitTime);
 
-        for (float t = 0; t < 1; t += Time.deltaTime)
+        for (float t = 0; t < 1; t += Time.deltaTime / 0.5f)
         {
             _blackImageFader.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, t));
             yield return null;
