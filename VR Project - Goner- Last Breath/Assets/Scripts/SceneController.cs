@@ -25,6 +25,7 @@ public class SceneController : SingletonDontDestroy<SceneController>
     private IEnumerator FadeScene(int _buildIndex, float _faderDuration, float _transitionWaitTime)
     {
         _blackImageFader.gameObject.SetActive(true);
+        _sceneFader.transform.SetParent(Instance.GetComponent<Transform>());
 
         for (float t = 0; t < 1; t += Time.deltaTime / _faderDuration)
         {
@@ -32,7 +33,6 @@ public class SceneController : SingletonDontDestroy<SceneController>
             yield return null;
         }
 
-        _sceneFader.transform.SetParent(Instance.GetComponent<Transform>());
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(_buildIndex);
         while (!asyncOperation.isDone)
             yield return null;
@@ -40,7 +40,7 @@ public class SceneController : SingletonDontDestroy<SceneController>
         CanvasInitialization();
         yield return new WaitForSeconds(_transitionWaitTime);
 
-        for (float t = 0; t < 1; t += Time.deltaTime / _faderDuration)
+        for (float t = 0; t < 1; t += Time.deltaTime)
         {
             _blackImageFader.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, t));
             yield return null;

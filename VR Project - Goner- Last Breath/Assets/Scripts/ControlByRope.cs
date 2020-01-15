@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class ControlByRope : MonoBehaviour
 {
     [SerializeField]
-    Transform ropeFirstCharJoint;
+    private Transform _ropeFirstCharJoint;
 
     [SerializeField]
-    Transform ovrCamera;
+    private AudioSource _monsterScream;
+    private AudioSource _maleScream;
 
     [SerializeField]
     float speed;
@@ -15,16 +15,31 @@ public class ControlByRope : MonoBehaviour
     [HideInInspector]
     public bool isLookingAtDummy;
 
+    private bool isMaleScreamPlayed, isRopeBreak;
+
+    private void Start()
+    {
+        _maleScream = GetComponent<AudioSource>();
+    }
+
     private void FixedUpdate()
     {
-        if (ropeFirstCharJoint.position.y <= 2)
+        if (_ropeFirstCharJoint.position.y <= 2 && !isRopeBreak)
         {
-            if (isLookingAtDummy)
+            isRopeBreak = true;
+            _monsterScream.Play();
+        }
+
+        if (isLookingAtDummy && isRopeBreak && !_monsterScream.isPlaying)
+        {
+            if (!isMaleScreamPlayed)
             {
-                //ovrCamera.LookAt(transform);
-                SceneController.LoadScene(1, 1, 3f);
-                transform.position += new Vector3(0, 0, ropeFirstCharJoint.position.y * speed * Time.deltaTime);
+                isMaleScreamPlayed = true;
+                _maleScream.Play();
+                SceneController.LoadScene(1, 3, 3f);
             }
+
+            transform.position += new Vector3(0, 0, speed * Time.deltaTime);
         }
     }
 }
