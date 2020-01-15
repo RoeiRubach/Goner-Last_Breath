@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class ControlByRope : MonoBehaviour
 {
@@ -8,7 +7,7 @@ public class ControlByRope : MonoBehaviour
     Transform ropeFirstCharJoint;
 
     [SerializeField]
-    AudioSource monsterScream, maleScream;
+    Transform ovrCamera;
 
     [SerializeField]
     float speed;
@@ -16,31 +15,16 @@ public class ControlByRope : MonoBehaviour
     [HideInInspector]
     public bool isLookingAtDummy;
 
-    private bool isRopeBreak, once;
-
     private void FixedUpdate()
     {
-        if (ropeFirstCharJoint.position.y <= 2 && !isRopeBreak)
+        if (ropeFirstCharJoint.position.y <= 2)
         {
-            isRopeBreak = true;
-            monsterScream.Play();
-        }
-
-        if (isLookingAtDummy && isRopeBreak)
-        {
-            if (!once)
+            if (isLookingAtDummy)
             {
-                once = true;
-                maleScream.Play();
+                //ovrCamera.LookAt(transform);
+                SceneController.LoadScene(1, 1, 3f);
+                transform.position += new Vector3(0, 0, ropeFirstCharJoint.position.y * speed * Time.deltaTime);
             }
-            StartCoroutine(WaitAndSwitchScenes(1));
-            transform.position += new Vector3(0, 0, speed * Time.deltaTime);
         }
-    }
-
-    IEnumerator WaitAndSwitchScenes(int sceneIndex)
-    {
-        yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene(sceneIndex);
     }
 }

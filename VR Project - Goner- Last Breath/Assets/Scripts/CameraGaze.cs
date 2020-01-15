@@ -13,13 +13,9 @@ public class CameraGaze : MonoBehaviour
 
         RaycastHit myHit;
         if (Physics.Raycast(myRay, out myHit, Mathf.Infinity, layerMask))
-        {
             controlByRope.isLookingAtDummy = true;
-        }
-        else
-        {
-            controlByRope.isLookingAtDummy = false;
-        }
 
+        else
+            controlByRope.isLookingAtDummy = false;
     }
 }
