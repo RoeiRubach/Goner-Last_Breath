@@ -12,6 +12,8 @@ public class SceneController : SingletonDontDestroy<SceneController>
     [SerializeField]
     private Canvas _sceneFader;
 
+    private Vector3 _smallForward = new Vector3(0, 0, 0.4f);
+
     private void Start()
     {
         CanvasInitialization();
@@ -48,7 +50,7 @@ public class SceneController : SingletonDontDestroy<SceneController>
 
         _blackImageFader.gameObject.SetActive(false);
     }
-
+    
     private void CanvasInitialization()
     {
         GameObject _mainCameraRef = GameObject.FindWithTag("MainCamera");
@@ -56,7 +58,7 @@ public class SceneController : SingletonDontDestroy<SceneController>
         _sceneFader.transform.SetParent(_mainCameraRef.GetComponent<Transform>());
         _sceneFader.transform.position = _sceneFader.transform.parent.position;
         _sceneFader.transform.localRotation = Quaternion.identity;
-        _sceneFader.transform.position += _sceneFader.transform.forward;
+        _sceneFader.transform.position += _smallForward;
         _blackImageFader.rectTransform.sizeDelta = new Vector2(Screen.width + 20, Screen.height + 20);
     }
 }
