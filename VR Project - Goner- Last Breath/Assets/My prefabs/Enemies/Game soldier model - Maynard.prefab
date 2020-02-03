@@ -1817,7 +1817,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6109364550529031463}
+  - component: {fileID: 2087057433146347646}
   - component: {fileID: 4198148086791483485}
+  - component: {fileID: 8926883467846643532}
   m_Layer: 0
   m_Name: Game soldier model - Maynard
   m_TagString: Untagged
@@ -1832,7 +1834,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7103174318002237236}
-  m_LocalRotation: {x: -0, y: 0.97912455, z: -0, w: -0.20326118}
+  m_LocalRotation: {x: 0, y: 0.97912544, z: -0, w: -0.20325705}
   m_LocalPosition: {x: 2.742921, y: 0, z: 1.9604625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1841,6 +1843,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 203.45499, z: 0}
+--- !u!114 &2087057433146347646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7103174318002237236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b09e777eb1ed8b4898144f76f05f8ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyHealth: 0
+  _walkingSpeed: 0
+  _runningSpeed: 0
+  _turningSpeed: 0
 --- !u!95 &4198148086791483485
 Animator:
   serializedVersion: 3
@@ -1851,7 +1869,7 @@ Animator:
   m_GameObject: {fileID: 7103174318002237236}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 66558490da11e28468f1a6c0dfb547c3, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9bb53020f4a9c5e4b8bb8c3fcab54876, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1860,6 +1878,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &8926883467846643532
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7103174318002237236}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6, y: 1.5, z: 0.5}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &7109562786734824273
 GameObject:
   m_ObjectHideFlags: 0

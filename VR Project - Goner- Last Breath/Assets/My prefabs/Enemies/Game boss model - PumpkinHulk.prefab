@@ -1441,7 +1441,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9131843823577329853}
+  - component: {fileID: 4572676204357297768}
   - component: {fileID: 1166661356758195655}
+  - component: {fileID: 8623054612563720548}
   m_Layer: 0
   m_Name: Game boss model - PumpkinHulk
   m_TagString: Untagged
@@ -1465,6 +1467,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 150.03801, z: 0}
+--- !u!114 &4572676204357297768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5251630698963206830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2e8a5052f1f254bbc65f25f13e69f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyHealth: 0
+  _walkingSpeed: 0
+  _runningSpeed: 0
+  _turningSpeed: 0
 --- !u!95 &1166661356758195655
 Animator:
   serializedVersion: 3
@@ -1475,7 +1493,7 @@ Animator:
   m_GameObject: {fileID: 5251630698963206830}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b03fa80a7e143d94abf967ccaed61a87, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c849cd914a37cd0499dcb93afec2ee1f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1484,6 +1502,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &8623054612563720548
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5251630698963206830}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.75, y: 1.8, z: 0.5}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &5455850628204138351
 GameObject:
   m_ObjectHideFlags: 0

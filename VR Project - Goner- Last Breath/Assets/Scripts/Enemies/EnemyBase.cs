@@ -1,18 +1,48 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class EnemyBase : MonoBehaviour
+public enum EnemyTransitionParameters
 {
-    // Start is called before the first frame update
-    void Start()
+    _isAtThrowingSpot,
+    _isDead
+}
+
+public abstract class EnemyBase : MonoBehaviour
+{
+    [SerializeField] protected float _enemyHealth;
+    [SerializeField] protected float _walkingSpeed, _runningSpeed, _turningSpeed;
+
+    protected Animator _enemyAnimator;
+
+    protected virtual void Awake()
     {
-        
+        _enemyAnimator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void TakeDamage(float _damageAmount)
     {
-        
+        _enemyHealth -= _damageAmount;
+
+        if (_enemyHealth <= 0f)
+        {
+            EnemyBeenKilled();
+        }
     }
+
+    protected virtual void EnemyBeenKilled()
+    {
+        _enemyAnimator.SetBool(EnemyTransitionParameters._isDead.ToString(), true);
+
+        //_enemyAnimator.enabled = false;
+
+        // Destroy(gameObject);
+    }
+
+#if UNITY_EDITOR
+    [ContextMenu("Kill this enemy - PLAYMODE ONLY!")]
+    public void KillEnemy()
+    {
+        _enemyAnimator.SetBool(EnemyTransitionParameters._isAtThrowingSpot.ToString(), true);
+        EnemyBeenKilled();
+    }
+#endif
 }

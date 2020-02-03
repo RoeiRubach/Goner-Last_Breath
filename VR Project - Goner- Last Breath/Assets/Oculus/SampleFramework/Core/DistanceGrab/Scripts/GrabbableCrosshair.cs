@@ -25,9 +25,12 @@ namespace OculusSampleFramework
         [SerializeField]
         GameObject m_enabledCrosshair;
 
+        private Outline _outline;
+
         private void Start()
         {
             m_centerEyeAnchor = GameObject.Find("CenterEyeAnchor").transform;
+            _outline = GetComponentInParent<Outline>();
         }
 
         public void SetState(CrosshairState cs)
@@ -35,16 +38,35 @@ namespace OculusSampleFramework
             m_state = cs;
             if (cs == CrosshairState.Disabled)
             {
+                if (!m_targetedCrosshair && !m_enabledCrosshair)
+                    return;
+
                 m_targetedCrosshair.SetActive(false);
                 m_enabledCrosshair.SetActive(false);
             }
             else if (cs == CrosshairState.Enabled)
             {
+                if (!m_targetedCrosshair && !m_enabledCrosshair)
+                {
+                    if (_outline)
+                    {
+                        _outline.enabled = false;
+                        return;
+                    }
+                }
                 m_targetedCrosshair.SetActive(false);
                 m_enabledCrosshair.SetActive(true);
             }
             else if (cs == CrosshairState.Targeted)
             {
+                if (!m_targetedCrosshair && !m_enabledCrosshair)
+                {
+                    if (_outline)
+                    {
+                        _outline.enabled = true;
+                        return;
+                    }
+                }
                 m_targetedCrosshair.SetActive(true);
                 m_enabledCrosshair.SetActive(false);
             }

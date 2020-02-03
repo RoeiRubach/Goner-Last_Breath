@@ -17,8 +17,6 @@ public class ShotIfGrabbed : MonoBehaviour
     void Update()
     {
         if (ovrGrabbable.isGrabbed && OVRInput.GetDown(shootingButton, ovrGrabbable.grabbedBy.GetController()))
-        {
             simpleShoot.TriggerShoot();
-        }
     }
 }

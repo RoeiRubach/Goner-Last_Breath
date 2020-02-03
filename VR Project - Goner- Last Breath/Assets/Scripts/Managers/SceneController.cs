@@ -1,33 +1,50 @@
-﻿using UnityEngine;
+﻿// I'm inheriting from my "Singleton Don't Destroy" script. Can be found among my gists.
+
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-// I'm inheriting from my "Singleton Don't Destroy" script. Can be found among my gists.
+public enum buildIndexes
+{
+    MainMenu,
+}
+
+/// <summary>
+/// Scene transition manager
+/// </summary>
 public class SceneController : SingletonDontDestroy<SceneController>
 {
-    [SerializeField]
-    private Image _blackImageFader;
+    /* 
+     Switch the canvas' Render Mode to "world space" (in the inspector).
+     Script needs a reference to an image on a Canvas. Script will find and set "MainCamera" into event camera.
+     Image will scale according to the using screen. Image will fade in and out between the scenes when called.
+     Set off the image via the inspector.
+    */
 
-    [SerializeField]
-    private Canvas _sceneFader;
+    [SerializeField] private Image _blackImageFader;
 
-    private Vector3 _smallForward = new Vector3(0, 0, 0.4f);
+    [SerializeField] private Canvas _sceneFader;
+
+    private Vector3 _smallForward = new Vector3(0, 0, 0.33f);
 
     private void Start()
     {
         CanvasInitialization();
     }
 
-    public static void LoadScene(int _buildIndex, float _faderDuration, float _transitionWaitTime)
+    public static void LoadScene(int _buildIndex = (int)buildIndexes.MainMenu,
+                                    float _faderDuration = 1f,
+                                        float _transitionWaitTime = 1f)
     {
-        Instance.StartCoroutine(Instance.FadeScene(_buildIndex, _faderDuration, _transitionWaitTime));
+        Debug.Assert(Instance, "LoadScene method been called but Instance is null");
+        if (Instance)
+            Instance.StartCoroutine(Instance.FadeScene(_buildIndex, _faderDuration, _transitionWaitTime));
     }
 
     private IEnumerator FadeScene(int _buildIndex, float _faderDuration, float _transitionWaitTime)
     {
         _blackImageFader.gameObject.SetActive(true);
-        _sceneFader.transform.SetParent(Instance.GetComponent<Transform>());
 
         for (float t = 0; t < 1; t += Time.deltaTime / _faderDuration)
         {
@@ -35,6 +52,8 @@ public class SceneController : SingletonDontDestroy<SceneController>
             yield return null;
         }
 
+        _blackImageFader.color = new Color(0, 0, 0, 1);
+        _sceneFader.transform.SetParent(Instance.GetComponent<Transform>());
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(_buildIndex);
         while (!asyncOperation.isDone)
             yield return null;
@@ -50,7 +69,7 @@ public class SceneController : SingletonDontDestroy<SceneController>
 
         _blackImageFader.gameObject.SetActive(false);
     }
-    
+
     private void CanvasInitialization()
     {
         GameObject _mainCameraRef = GameObject.FindWithTag("MainCamera");

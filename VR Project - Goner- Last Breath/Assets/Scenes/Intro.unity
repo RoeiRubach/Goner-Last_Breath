@@ -1838,7 +1838,7 @@ GameObject:
   m_Component:
   - component: {fileID: 573613869}
   m_Layer: 0
-  m_Name: Environment
+  m_Name: '---Environment'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1931,7 +1931,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &599613651
 PrefabInstance:
@@ -2293,7 +2293,7 @@ GameObject:
   - component: {fileID: 659274283}
   - component: {fileID: 659274284}
   m_Layer: 0
-  m_Name: SceneManager
+  m_Name: '---SceneManager'
   m_TagString: SceneManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2312,7 +2312,7 @@ Transform:
   m_Children:
   - {fileID: 600063856}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &659274284
 MonoBehaviour:
@@ -11774,7 +11774,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2105540036}
   m_Layer: 0
-  m_Name: Oculus
+  m_Name: '---Oculus'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
