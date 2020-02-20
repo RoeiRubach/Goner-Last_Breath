@@ -8,14 +8,32 @@ public enum EnemyTransitionParameters
 
 public abstract class EnemyBase : MonoBehaviour
 {
+    [SerializeField] protected Transform _playerPosition;
     [SerializeField] protected float _enemyHealth;
-    [SerializeField] protected float _walkingSpeed, _runningSpeed, _turningSpeed;
+    [SerializeField] protected float _runningSpeed, _turningSpeed;
+
+    [SerializeField] private float _animationTransitionTime;
+
+    protected bool _isAllowToStart;
 
     protected Animator _enemyAnimator;
 
     protected virtual void Awake()
     {
         _enemyAnimator = GetComponent<Animator>();
+    }
+
+    protected virtual void Start()
+    {
+        Invoke("ActivateUpdateMethod", _animationTransitionTime);
+    }
+
+    protected virtual void Update()
+    {
+        if (_isAllowToStart)
+        {
+            transform.localPosition += (transform.forward * (Time.deltaTime * _runningSpeed));
+        }
     }
 
     public virtual void TakeDamage(float _damageAmount)
@@ -35,6 +53,11 @@ public abstract class EnemyBase : MonoBehaviour
         //_enemyAnimator.enabled = false;
 
         // Destroy(gameObject);
+    }
+
+    private void ActivateUpdateMethod()
+    {
+        _isAllowToStart = true;
     }
 
 #if UNITY_EDITOR

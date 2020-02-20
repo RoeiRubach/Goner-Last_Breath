@@ -39,7 +39,13 @@ namespace OculusSampleFramework
             if (cs == CrosshairState.Disabled)
             {
                 if (!m_targetedCrosshair && !m_enabledCrosshair)
-                    return;
+                {
+                    if (_outline)
+                    {
+                        _outline.enabled = false;
+                        return;
+                    }
+                }
 
                 m_targetedCrosshair.SetActive(false);
                 m_enabledCrosshair.SetActive(false);

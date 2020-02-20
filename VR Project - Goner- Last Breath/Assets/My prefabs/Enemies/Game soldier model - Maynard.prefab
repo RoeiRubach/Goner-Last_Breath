@@ -1857,8 +1857,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyHealth: 0
   _walkingSpeed: 0
-  _runningSpeed: 0
+  _runningSpeed: 3
   _turningSpeed: 0
+  _animationTransitionTime: 3
 --- !u!95 &4198148086791483485
 Animator:
   serializedVersion: 3

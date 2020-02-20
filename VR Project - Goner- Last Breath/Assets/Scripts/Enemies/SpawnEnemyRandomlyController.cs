@@ -7,7 +7,7 @@ public class SpawnEnemyRandomlyController : MonoBehaviour
     private int maxChilders;
 
     [Range(1f, 5f)]
-    private float spawnTime = 2.5f;
+    [SerializeField] private float spawnTime = 2.5f;
     private float spawnTimer;
 
     private void Start()
@@ -24,7 +24,13 @@ public class SpawnEnemyRandomlyController : MonoBehaviour
             spawnTimer = spawnTime;
             int randomChild = Random.Range(0, maxChilders);
 
-            Instantiate(enemyPrefab, gameObject.transform.GetChild(randomChild));
+            if (gameObject.transform.childCount != 0)
+                Instantiate(enemyPrefab, gameObject.transform.GetChild(randomChild).position, gameObject.transform.GetChild(randomChild).rotation);
+            else
+            {
+                Instantiate(enemyPrefab, gameObject.transform.position, gameObject.transform.rotation);
+                GetComponent<SpawnEnemyRandomlyController>().enabled = false;
+            }
         }
     }
 }
