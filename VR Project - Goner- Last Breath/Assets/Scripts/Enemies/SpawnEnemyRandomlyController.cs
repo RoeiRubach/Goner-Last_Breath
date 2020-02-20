@@ -1,18 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SpawnEnemyRandomly : MonoBehaviour
+public class SpawnEnemyRandomlyController : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject enemyPrefab;
+    [SerializeField] private GameObject enemyPrefab;
 
+    private int maxChilders;
 
-    int maxChilders;
-    private float spawnTimer = 3f;
+    [Range(1f, 5f)]
+    private float spawnTime = 2.5f;
+    private float spawnTimer;
 
     private void Start()
     {
+        spawnTimer = spawnTime;
         maxChilders = gameObject.transform.childCount;
     }
 
@@ -21,11 +21,10 @@ public class SpawnEnemyRandomly : MonoBehaviour
         spawnTimer -= Time.deltaTime;
         if (spawnTimer <= 0)
         {
-            spawnTimer = 3f;
+            spawnTimer = spawnTime;
             int randomChild = Random.Range(0, maxChilders);
 
             Instantiate(enemyPrefab, gameObject.transform.GetChild(randomChild));
         }
-
     }
 }
