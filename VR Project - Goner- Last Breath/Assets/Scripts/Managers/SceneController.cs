@@ -72,7 +72,7 @@ public class SceneController : SingletonDontDestroy<SceneController>
 
     private void CanvasInitialization()
     {
-        GameObject _mainCameraRef = GameObject.FindWithTag("MainCamera");
+        GameObject _mainCameraRef = Camera.main.gameObject;
         _sceneFader.worldCamera = _mainCameraRef.GetComponent<Camera>();
         _sceneFader.transform.SetParent(_mainCameraRef.GetComponent<Transform>());
         _sceneFader.transform.position = _sceneFader.transform.parent.position;
