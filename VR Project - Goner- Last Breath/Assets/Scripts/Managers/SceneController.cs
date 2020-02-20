@@ -77,7 +77,7 @@ public class SceneController : SingletonDontDestroy<SceneController>
         _sceneFader.transform.SetParent(_mainCameraRef.GetComponent<Transform>());
         _sceneFader.transform.position = _sceneFader.transform.parent.position;
         _sceneFader.transform.localRotation = Quaternion.identity;
-        _sceneFader.transform.position += _smallForward;
+        _sceneFader.transform.localPosition += _smallForward;
         _blackImageFader.rectTransform.sizeDelta = new Vector2(Screen.width + 20, Screen.height + 20);
     }
 }
