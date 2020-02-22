@@ -27,7 +27,7 @@ public abstract class WeaponBase : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (ovrGrabbable.isGrabbed && OVRInput.GetDown(shootingButton, ovrGrabbable.grabbedBy.GetController()))
+        if (ovrGrabbable.isGrabbed && OVRInput.Get(shootingButton, ovrGrabbable.grabbedBy.GetController()))
         {
             if (Time.time >= _nextTimeToFire)
             {
