@@ -58,7 +58,23 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.21330275
+        functionName: PlaySoldierStep
+        data: 
+        objectReferenceParameter: {fileID: 7103174318002237236, guid: a6f3a3a2c4d33b149bda1368591d5160,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7545871
+        functionName: PlaySoldierStep
+        data: 
+        objectReferenceParameter: {fileID: 7103174318002237236, guid: a6f3a3a2c4d33b149bda1368591d5160,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

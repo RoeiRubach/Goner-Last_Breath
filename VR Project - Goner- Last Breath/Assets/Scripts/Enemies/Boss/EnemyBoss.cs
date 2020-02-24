@@ -12,7 +12,7 @@ public class EnemyBoss : EnemyBase
         transform.LookAt(_playerPosition);
     }
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
         if (_isAllowToStart)
         {

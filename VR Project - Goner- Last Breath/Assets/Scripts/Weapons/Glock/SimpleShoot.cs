@@ -21,7 +21,7 @@ public class SimpleShoot : MonoBehaviour
         ovrGrabbable = GetComponent<OVRGrabbable>();
         _audioSource = GetComponent<AudioSource>();
 
-        _bulletDamage = 0.5f;
+        _bulletDamage = 1f;
 
         if (barrelLocation == null)
             barrelLocation = transform;

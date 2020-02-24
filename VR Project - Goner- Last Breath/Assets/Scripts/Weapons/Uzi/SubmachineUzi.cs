@@ -2,8 +2,4 @@
 
 public class SubmachineUzi : WeaponBase
 {
-    //protected override void Reload()
-    //{
-
-    //}
 }

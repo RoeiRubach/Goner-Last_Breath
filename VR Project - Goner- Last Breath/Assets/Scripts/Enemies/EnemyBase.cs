@@ -9,12 +9,14 @@ public enum EnemyTransitionParameters
 
 public abstract class EnemyBase : MonoBehaviour
 {
+    protected GameManager _gameManager;
     [SerializeField] protected float _enemyMaxHealth;
     [SerializeField] protected float _runningSpeed;
 
     [SerializeField] protected float _animatorOffTime, _updateActivationTime, _distanceToAttack;
 
     protected Transform _playerPosition;
+    protected AudioSource _enemyAudioSource;
     protected float _enemyHealth, _distance;
     protected bool _isAllowToStart;
 
@@ -30,6 +32,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void Start()
     {
+        _gameManager = FindObjectOfType<GameManager>();
+        _enemyAudioSource = GetComponent<AudioSource>();
         _playerPosition = GameObject.FindWithTag("Player").transform;
         Invoke("ActivateUpdateMethod", _updateActivationTime);
         _simpleShoot = FindObjectOfType<SimpleShoot>();
@@ -37,14 +41,15 @@ public abstract class EnemyBase : MonoBehaviour
         _distance = Vector3.Distance(transform.localPosition, _playerPosition.position);
     }
 
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
         _distance = Vector3.Distance(transform.localPosition, _playerPosition.position);
 
         if (_distance <= _distanceToAttack)
         {
-            GetComponent<AudioSource>().Play();
+            _enemyAudioSource.Play();
             _enemyAnimator.SetBool(EnemyTransitionParameters._isAtAttackingPosition.ToString(), true);
+            _gameManager.RestartLevel();
             return;
         }
 
@@ -70,7 +75,9 @@ public abstract class EnemyBase : MonoBehaviour
 
     public virtual void EnemyBeenKilled()
     {
-        GetComponent<BoxCollider>().enabled = false;
+        if (GetComponent<BoxCollider>())
+            GetComponent<BoxCollider>().enabled = false;
+
         _enemyAnimator.SetBool(EnemyTransitionParameters._isDead.ToString(), true);
         Invoke("SetAnimatorOffAndDestroy", _animatorOffTime);
     }
@@ -80,7 +87,7 @@ public abstract class EnemyBase : MonoBehaviour
         _isAllowToStart = true;
     }
 
-    private void SetAnimatorOffAndDestroy()
+    protected void SetAnimatorOffAndDestroy()
     {
         _enemyAnimator.enabled = false;
 

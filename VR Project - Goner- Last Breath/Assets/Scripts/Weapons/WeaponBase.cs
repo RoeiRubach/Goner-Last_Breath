@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class WeaponBase : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public abstract class WeaponBase : MonoBehaviour
     private Camera _mainCameraRef;
     private float _nextTimeToFire = 0f;
     private bool _isAbleToSpawnNewMag;
+    private Text _bulletCounter;
 
     protected virtual void Start()
     {
@@ -33,6 +35,8 @@ public abstract class WeaponBase : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         ovrGrabbable = GetComponent<OVRGrabbable>();
         _currentBulletAmount = _submachineMaxBullets;
+        _bulletCounter = GetComponentInChildren<Text>();
+        _bulletCounter.text = _currentBulletAmount.ToString();
         _magazineCopyRef = Instantiate(_magazineRef, _magParentRef);
         _magazineCopyRef.transform.localScale = Vector3.one;
     }
@@ -64,7 +68,10 @@ public abstract class WeaponBase : MonoBehaviour
                 _audioSource.PlayOneShot(_magDetach);
 
                 if (_currentBulletAmount != 0)
+                {
                     _currentBulletAmount = 1;
+                    _bulletCounter.text = _currentBulletAmount.ToString();
+                }
 
                 _magazineCopyRef.transform.parent = null;
                 _magazineCopyRef.GetComponent<BoxCollider>().enabled = true;
@@ -93,6 +100,7 @@ public abstract class WeaponBase : MonoBehaviour
 
             Destroy(_tempFlash, 0.5f);
             _currentBulletAmount--;
+            _bulletCounter.text = _currentBulletAmount.ToString();
 
             DestroyBulletsIfNone();
         }
@@ -104,9 +112,15 @@ public abstract class WeaponBase : MonoBehaviour
 
         if (Physics.Raycast(_barrelLocation.transform.position, _barrelLocation.transform.forward, out hit, 100f))
         {
+            print(hit.transform.name);
             if (hit.transform.CompareTag("Enemy"))
             {
+                print("enemy been triggered");
                 EnemyBase _currentEnemy = hit.transform.GetComponent<EnemyBase>();
+
+                if (!_currentEnemy)
+                    _currentEnemy = hit.transform.root.GetComponent<EnemyBase>();
+                
                 _currentEnemy.TakeDamage(_damage);
                 Invoke("InvokeHitDetectionEnemy", 0.15f);
             }
@@ -166,7 +180,7 @@ public abstract class WeaponBase : MonoBehaviour
         _magazineCopyRef.AddComponent<AttachMagazine>();
         _magazineCopyRef.GetComponent<BoxCollider>().enabled = true;
         _magazineCopyRef.GetComponent<Rigidbody>().isKinematic = false;
-        _magazineCopyRef.GetComponent<Rigidbody>().drag = 25f;
+        _magazineCopyRef.GetComponent<Rigidbody>().drag = 55f;
         _isAbleToSpawnNewMag = false;
     }
 
@@ -179,6 +193,7 @@ public abstract class WeaponBase : MonoBehaviour
         _magazineCopyRef.transform.localPosition = _magazineRef.transform.localPosition;
         _magazineCopyRef.transform.localRotation = _magazineRef.transform.localRotation;
         _currentBulletAmount = _submachineMaxBullets;
+        _bulletCounter.text = _currentBulletAmount.ToString();
         _magazineCopyRef.GetComponent<BoxCollider>().enabled = false;
         _magazineCopyRef.GetComponent<Rigidbody>().isKinematic = true;
         _magazineCopyRef.GetComponent<Rigidbody>().drag = 0f;
