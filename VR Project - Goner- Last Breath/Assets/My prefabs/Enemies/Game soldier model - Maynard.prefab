@@ -1860,7 +1860,7 @@ MonoBehaviour:
   _runningSpeed: 3
   _animatorOffTime: 4
   _updateActivationTime: 3
-  _simpleShoot: {fileID: 0}
+  _distanceToAttack: 1.5
 --- !u!95 &4198148086791483485
 Animator:
   serializedVersion: 3

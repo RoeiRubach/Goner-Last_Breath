@@ -8,6 +8,8 @@ TagManager:
   - Bullet
   - SceneManager
   - MagazinePlacement
+  - Concrete
+  - Metal
   layers:
   - Default
   - TransparentFX

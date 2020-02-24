@@ -1486,9 +1486,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyMaxHealth: 4
-  _runningSpeed: 5
+  _runningSpeed: 3
   _animatorOffTime: 0
   _updateActivationTime: 2
+  _distanceToAttack: 6
 --- !u!95 &1303903396875040012
 Animator:
   serializedVersion: 3

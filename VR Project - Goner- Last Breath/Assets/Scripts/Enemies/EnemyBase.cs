@@ -12,10 +12,10 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] protected float _enemyMaxHealth;
     [SerializeField] protected float _runningSpeed;
 
-    [SerializeField] private float _animatorOffTime, _updateActivationTime;
+    [SerializeField] protected float _animatorOffTime, _updateActivationTime, _distanceToAttack;
 
     protected Transform _playerPosition;
-    protected float _enemyHealth;
+    protected float _enemyHealth, _distance;
     protected bool _isAllowToStart;
 
     protected Animator _enemyAnimator;
@@ -30,18 +30,20 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void Start()
     {
-        Invoke("ActivateUpdateMethod", _updateActivationTime);
         _playerPosition = GameObject.FindWithTag("Player").transform;
+        Invoke("ActivateUpdateMethod", _updateActivationTime);
         _simpleShoot = FindObjectOfType<SimpleShoot>();
         Debug.Assert(_simpleShoot, "its null buddy");
+        _distance = Vector3.Distance(transform.localPosition, _playerPosition.position);
     }
 
     protected virtual void Update()
     {
-        float _distance = Vector3.Distance(transform.localPosition, _playerPosition.position);
+        _distance = Vector3.Distance(transform.localPosition, _playerPosition.position);
 
-        if (_distance <= 1.5f)
+        if (_distance <= _distanceToAttack)
         {
+            GetComponent<AudioSource>().Play();
             _enemyAnimator.SetBool(EnemyTransitionParameters._isAtAttackingPosition.ToString(), true);
             return;
         }
@@ -66,7 +68,7 @@ public abstract class EnemyBase : MonoBehaviour
             EnemyBeenKilled();
     }
 
-    protected virtual void EnemyBeenKilled()
+    public virtual void EnemyBeenKilled()
     {
         GetComponent<BoxCollider>().enabled = false;
         _enemyAnimator.SetBool(EnemyTransitionParameters._isDead.ToString(), true);

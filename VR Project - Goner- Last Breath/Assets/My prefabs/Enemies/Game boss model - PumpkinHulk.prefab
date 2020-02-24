@@ -1483,6 +1483,7 @@ MonoBehaviour:
   _runningSpeed: 5
   _animatorOffTime: 10
   _updateActivationTime: 0
+  _distanceToAttack: 1.5
   _walkingSpeed: 0
 --- !u!95 &1166661356758195655
 Animator:

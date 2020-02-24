@@ -651,6 +651,7 @@ GameObject:
   - component: {fileID: 4959381388824716816}
   - component: {fileID: 9127101904064741449}
   - component: {fileID: 996380467779533247}
+  - component: {fileID: 5872262615798955610}
   m_Layer: 8
   m_Name: Mini Uzi
   m_TagString: Untagged
@@ -710,7 +711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _submachineFireRate: 10
-  _damage: 0.25
+  _damage: 0.3
   _casingPrefab: {fileID: 1482960508195586, guid: 91dcfdffdc6d38e47916b9c549e26dac,
     type: 3}
   _muzzleFlashPrefab: {fileID: 1782395880954752, guid: e802c9c5b472d2345a808aca4bc81014,
@@ -720,7 +721,12 @@ MonoBehaviour:
   _barrelLocation: {fileID: 5006965781514938778}
   _casingExitLocation: {fileID: 1959083140626626813}
   _magParentRef: {fileID: 1393495717667249915}
-  _leftHandRef: {fileID: 0}
+  _shotHitEnemy: {fileID: 8300000, guid: 7f6f4005781137d4eb5e06f08927b507, type: 3}
+  _shotHitConcrete: {fileID: 8300000, guid: f36f5f41b1fefbd4d878a5eb695a914f, type: 3}
+  _shotHitMetal: {fileID: 8300000, guid: c1912732697ef054e90de9b7a1e1b5c9, type: 3}
+  _magDetach: {fileID: 8300000, guid: 0ff491fea8ac7b943bcc16da7dceb3e7, type: 3}
+  _magAttach: {fileID: 8300000, guid: ec4372270f3b50847b4c7cfa19474a98, type: 3}
+  _machinegunShoot: {fileID: 8300000, guid: 8a0c289ca8ede784abc0b3c03fd9f4e3, type: 3}
 --- !u!54 &9127101904064741449
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -758,6 +764,102 @@ MonoBehaviour:
   - {fileID: 8539148916316960793}
   - {fileID: 3857048591124151395}
   m_materialColorField: 
+--- !u!82 &5872262615798955610
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8157926608271813208}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.8
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8750004022523325083
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,9 @@ public class AttachMagazine : MonoBehaviour
         if (other.transform.CompareTag("MagazinePlacement"))
         {
             if (other.GetComponentInParent<WeaponBase>().AttachMagazineToItsPlace())
+            {
                 Destroy(GetComponent<AttachMagazine>());
+            }
         }
     }
 }

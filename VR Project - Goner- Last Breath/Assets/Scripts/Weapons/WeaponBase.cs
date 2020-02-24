@@ -14,8 +14,12 @@ public abstract class WeaponBase : MonoBehaviour
     protected Animator animator;
 
     [SerializeField] private GameObject _casingPrefab, _muzzleFlashPrefab, _magazineRef;
-    [SerializeField] private Transform _barrelLocation, _casingExitLocation, _magParentRef, _leftHandRef;
+    [SerializeField] private Transform _barrelLocation, _casingExitLocation, _magParentRef;
+    [SerializeField] private AudioClip _shotHitEnemy, _shotHitConcrete, _shotHitMetal, _magDetach, _magAttach, _machinegunShoot;
 
+    protected GameManager _gameManager;
+    private AudioSource _audioSource;
+    private Transform _leftHandRef;
     private GameObject _magazineCopyRef;
     private Camera _mainCameraRef;
     private float _nextTimeToFire = 0f;
@@ -23,7 +27,10 @@ public abstract class WeaponBase : MonoBehaviour
 
     protected virtual void Start()
     {
+        _gameManager = FindObjectOfType<GameManager>();
         _mainCameraRef = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        _leftHandRef = _gameManager.GetLeftHandRef();
+        _audioSource = GetComponent<AudioSource>();
         ovrGrabbable = GetComponent<OVRGrabbable>();
         _currentBulletAmount = _submachineMaxBullets;
         _magazineCopyRef = Instantiate(_magazineRef, _magParentRef);
@@ -54,6 +61,8 @@ public abstract class WeaponBase : MonoBehaviour
         {
             if (_magazineCopyRef.transform.parent)
             {
+                _audioSource.PlayOneShot(_magDetach);
+
                 if (_currentBulletAmount != 0)
                     _currentBulletAmount = 1;
 
@@ -72,15 +81,12 @@ public abstract class WeaponBase : MonoBehaviour
     {
         if (_currentBulletAmount != 0)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(_barrelLocation.transform.position, _barrelLocation.transform.forward, out hit, 100f))
-            {
-                print(hit.transform.name);
-                EnemyBase _currentEnemy = hit.transform.GetComponent<EnemyBase>();
+            _audioSource.PlayOneShot(_machinegunShoot);
 
-                if (_currentEnemy)
-                    _currentEnemy.TakeDamage(_damage);
-            }
+            OVRInput.SetControllerVibration(0.3f, 0.3f, ovrGrabbable.grabbedBy.GetController());
+            Invoke("InvokeResetHaptic", 0.25f);
+
+            RaycastOnTarget();
 
             GameObject _tempFlash;
             _tempFlash = Instantiate(_muzzleFlashPrefab, _barrelLocation.position, _barrelLocation.rotation);
@@ -90,6 +96,44 @@ public abstract class WeaponBase : MonoBehaviour
 
             DestroyBulletsIfNone();
         }
+    }
+
+    private void RaycastOnTarget()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(_barrelLocation.transform.position, _barrelLocation.transform.forward, out hit, 100f))
+        {
+            if (hit.transform.CompareTag("Enemy"))
+            {
+                EnemyBase _currentEnemy = hit.transform.GetComponent<EnemyBase>();
+                _currentEnemy.TakeDamage(_damage);
+                Invoke("InvokeHitDetectionEnemy", 0.15f);
+            }
+            else if (hit.transform.CompareTag("Concrete"))
+            {
+                Invoke("InvokeHitDetectionConcrete", 0.15f);
+            }
+            else if (hit.transform.CompareTag("Metal"))
+            {
+                Invoke("InvokeHitDetectionMetal", 0.15f);
+            }
+        }
+    }
+
+    private void InvokeHitDetectionEnemy()
+    {
+        _audioSource.PlayOneShot(_shotHitEnemy);
+    }
+
+    private void InvokeHitDetectionConcrete()
+    {
+        _audioSource.PlayOneShot(_shotHitConcrete);
+    }
+
+    private void InvokeHitDetectionMetal()
+    {
+        _audioSource.PlayOneShot(_shotHitMetal);
     }
 
     private void CasingRelease()
@@ -128,6 +172,9 @@ public abstract class WeaponBase : MonoBehaviour
 
     public bool AttachMagazineToItsPlace()
     {
+        _audioSource.PlayOneShot(_magAttach);
+
+        _magazineCopyRef.GetComponent<OVRGrabbable>().grabbedBy.ForceRelease(_magazineCopyRef.GetComponent<OVRGrabbable>());
         _magazineCopyRef.transform.parent = _magParentRef;
         _magazineCopyRef.transform.localPosition = _magazineRef.transform.localPosition;
         _magazineCopyRef.transform.localRotation = _magazineRef.transform.localRotation;
@@ -136,5 +183,10 @@ public abstract class WeaponBase : MonoBehaviour
         _magazineCopyRef.GetComponent<Rigidbody>().isKinematic = true;
         _magazineCopyRef.GetComponent<Rigidbody>().drag = 0f;
         return true;
+    }
+
+    private void InvokeResetHaptic()
+    {
+        OVRInput.SetControllerVibration(0f, 0f, ovrGrabbable.grabbedBy.GetController());
     }
 }
