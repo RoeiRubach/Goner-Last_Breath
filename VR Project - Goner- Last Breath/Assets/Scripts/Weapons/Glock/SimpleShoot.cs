@@ -8,10 +8,13 @@ public class SimpleShoot : MonoBehaviour
     public Transform barrelLocation;
     public Transform casingExitLocation;
 
-    public float shotPower = 100f;
+    [SerializeField] private float _shotPower;
+    public float _bulletDamage { get; private set; }
 
     void Start()
     {
+        _bulletDamage = 0.5f;
+
         if (barrelLocation == null)
             barrelLocation = transform;
     }
@@ -28,7 +31,7 @@ public class SimpleShoot : MonoBehaviour
         // bullet.GetComponent<Rigidbody>().AddForce(barrelLocation.forward * shotPower);
 
         GameObject tempFlash;
-        Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation).GetComponent<Rigidbody>().AddForce(barrelLocation.forward * shotPower);
+        Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation).GetComponent<Rigidbody>().AddForce(barrelLocation.forward * _shotPower);
         tempFlash = Instantiate(muzzleFlashPrefab, barrelLocation.position, barrelLocation.rotation);
 
         Destroy(tempFlash, 0.5f);

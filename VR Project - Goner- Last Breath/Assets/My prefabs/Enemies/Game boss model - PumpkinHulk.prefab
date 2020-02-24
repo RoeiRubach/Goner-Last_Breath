@@ -1446,7 +1446,7 @@ GameObject:
   - component: {fileID: 8623054612563720548}
   m_Layer: 0
   m_Name: Game boss model - PumpkinHulk
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1479,10 +1479,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad2e8a5052f1f254bbc65f25f13e69f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyHealth: 0
+  _enemyMaxHealth: 6
+  _runningSpeed: 5
+  _animatorOffTime: 10
+  _updateActivationTime: 0
   _walkingSpeed: 0
-  _runningSpeed: 0
-  _turningSpeed: 0
 --- !u!95 &1166661356758195655
 Animator:
   serializedVersion: 3

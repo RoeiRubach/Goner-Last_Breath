@@ -1448,11 +1448,11 @@ GameObject:
   - component: {fileID: 8976350233482877046}
   - component: {fileID: 4520519176776089153}
   - component: {fileID: 1303903396875040012}
-  - component: {fileID: 7085384185828861827}
   - component: {fileID: 1043499746313635395}
+  - component: {fileID: 938900883}
   m_Layer: 0
   m_Name: Game commander model - Drake
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1485,11 +1485,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 017257de3a255154bbfae8736b19b7d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPosition: {fileID: 0}
-  _enemyHealth: 0
-  _runningSpeed: 0
-  _turningSpeed: 0
-  _animationTransitionTime: 0
+  _enemyMaxHealth: 4
+  _runningSpeed: 5
+  _animatorOffTime: 0
+  _updateActivationTime: 2
 --- !u!95 &1303903396875040012
 Animator:
   serializedVersion: 3
@@ -1509,19 +1508,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &7085384185828861827
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5388907846159772261}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6, y: 1.5, z: 0.5}
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!82 &1043499746313635395
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1618,6 +1604,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!54 &938900883
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5388907846159772261}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 3
 --- !u!1 &5399967572545379840
 GameObject:
   m_ObjectHideFlags: 0
@@ -2120,9 +2122,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8881175193090735958}
+  - component: {fileID: 1937070412}
   m_Layer: 0
   m_Name: mixamorig:Spine
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2142,6 +2145,19 @@ Transform:
   m_Father: {fileID: 8892555463964392176}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1937070412
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7813778831246904719}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6, y: 1.5, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8102392094443981910
 GameObject:
   m_ObjectHideFlags: 0

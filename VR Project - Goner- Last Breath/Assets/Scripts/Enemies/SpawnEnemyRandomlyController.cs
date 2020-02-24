@@ -6,7 +6,7 @@ public class SpawnEnemyRandomlyController : MonoBehaviour
 
     private int maxChilders;
 
-    [Range(1f, 5f)]
+    [Range(1f, 7f)]
     [SerializeField] private float spawnTime = 2.5f;
     private float spawnTimer;
 

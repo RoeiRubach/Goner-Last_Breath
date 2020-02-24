@@ -245,6 +245,7 @@ public class OVRGrabber : MonoBehaviour
         }
 
         // Disable grab volumes to prevent overlaps
+        print("disable grab volumes ");
         GrabVolumeEnable(false);
 
         if (closestGrabbable != null)
