@@ -18,7 +18,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected Transform _playerPosition;
     protected AudioSource _enemyAudioSource;
     protected float _enemyHealth, _distance;
-    protected bool _isAllowToStart;
+    protected bool _isAllowToStart, _isRestarting;
 
     protected Animator _enemyAnimator;
 
@@ -49,7 +49,12 @@ public abstract class EnemyBase : MonoBehaviour
         {
             _enemyAudioSource.Play();
             _enemyAnimator.SetBool(EnemyTransitionParameters._isAtAttackingPosition.ToString(), true);
-            _gameManager.RestartLevel();
+
+            if (!_isRestarting)
+            {
+                _isRestarting = true;
+                _gameManager.RestartLevel();
+            }
             return;
         }
 
