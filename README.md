@@ -19,7 +19,7 @@ The game was inspired by [Hopeless: The Dark Cave](https://www.youtube.com/watch
 Unfortunately this project was created in our VR lab at the college (don't have a VR set at home) then Covid-19 started and I couldn't have access to the lab again to finish developing the game.\
 \
 In this course we learn all about the XR world and the basics of VR programming.\
-If you're interesting on which basics we learned, check out [My VR Playground](https://github.com/RoeiRubach/My-VR-Playground)
+If you're interested in what basics we've learned, check out [My VR Playground](https://github.com/RoeiRubach/My-VR-Playground)
 
 ## Project Status
 
