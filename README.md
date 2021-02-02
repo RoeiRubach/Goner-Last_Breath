@@ -42,7 +42,4 @@ This project was created with:
 To run this project, download the ZIP or clone the project code and open with Unity3D (compatible version recommended)
 
 ## Showcase and Screenshots
-
-
-
-## Credits
+Unfortunately this project was created in our VR lab at the college (don't have a VR set at home) then Covid-19 started and I couldn't have access to the lab again to take screenshots.
